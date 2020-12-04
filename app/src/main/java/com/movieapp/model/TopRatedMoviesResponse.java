@@ -15,10 +15,4 @@ public class TopRatedMoviesResponse {
     public List<Movie> getResults() {
         return results;
     }
-
-    @NonNull
-    @Override
-    public String toString() {
-        return results.toString();
-    }
 }

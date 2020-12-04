@@ -27,7 +27,7 @@ public class MovieListViewModel extends ViewModel {
         return movieList;
     }
 
-    public void makeApiCall(int page) {
+    public void makeApiCallForTopRatedMovieList(int page) {
         MovieDatabaseAPI movieDatabaseApi = RetroInstance.getRetroClient().create(MovieDatabaseAPI.class);
         Call<TopRatedMoviesResponse> call = movieDatabaseApi.getTopRatedMovieList(page);
         call.enqueue(new Callback<TopRatedMoviesResponse>() {

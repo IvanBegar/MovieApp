@@ -2,11 +2,9 @@ package com.movieapp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,24 +32,22 @@ public class TopRatedMovieListActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(RecyclerView.HORIZONTAL);
         recyclerView.setLayoutManager(layoutManager);
         adapter = new MovieListAdapter(this, movieList);
         recyclerView.setAdapter(adapter);
         viewModel = ViewModelProviders.of(this).get(MovieListViewModel.class);
-        viewModel.getMovieListObserver().observe(this, new Observer<List<Movie>>() {
-            @Override
-            public void onChanged(List<Movie> movies) {
-                if (movies != null) {
-                    if (movieList.isEmpty()) {
-                        movieList = movies;
-                    } else {
-                        movieList.addAll(movies);
-                    }
-                    adapter.setMovieList(movieList);
+        viewModel.getMovieListObserver().observe(this, movies -> {
+            if (movies != null) {
+                if (movieList.isEmpty()) {
+                    movieList = movies;
+                } else {
+                    movieList.addAll(movies);
                 }
+                adapter.setMovieList(movieList);
             }
         });
-        viewModel.makeApiCall(page);
+        viewModel.makeApiCallForTopRatedMovieList(page);
 
         recyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(this, recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
@@ -74,7 +70,7 @@ public class TopRatedMovieListActivity extends AppCompatActivity {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                if (dy > 0) //check for scroll down
+                if (dx > 0) //check for scroll down
                 {
                     visibleItemCount = layoutManager.getChildCount();
                     totalItemCount = layoutManager.getItemCount();
@@ -82,7 +78,7 @@ public class TopRatedMovieListActivity extends AppCompatActivity {
 
                     if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
                         page++;
-                        viewModel.makeApiCall(page);
+                        viewModel.makeApiCallForTopRatedMovieList(page);
                     }
 
                 }

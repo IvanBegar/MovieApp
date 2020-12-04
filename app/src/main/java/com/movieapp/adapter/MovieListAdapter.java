@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,11 +42,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.MyVi
     @Override
     public void onBindViewHolder(@NonNull MovieListAdapter.MyViewHolder holder, int position) {
         Movie currentMovie = movieList.get(position);
-
         String movieImagePath = IMAGE_BASE_URL + currentMovie.getImagePath();
-        String movieTitle = currentMovie.getTitle();
-
-        holder.movieTitle.setText(movieTitle);
         Log.v("imagepath", movieImagePath);
 
         Picasso.get()
@@ -66,12 +61,10 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.MyVi
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView movieTitle;
         ImageView imageView;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            movieTitle = itemView.findViewById(R.id.titleView);
             imageView = itemView.findViewById(R.id.imageView);
         }
     }
