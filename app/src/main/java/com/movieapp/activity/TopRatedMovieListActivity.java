@@ -17,10 +17,11 @@ import com.movieapp.model.Movie;
 import com.movieapp.util.RecyclerItemClickListener;
 import com.movieapp.viewmodel.MovieListViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TopRatedMovieListActivity extends AppCompatActivity {
-    private List<Movie> movieList;
+    private List<Movie> movieList = new ArrayList<>();
     private MovieListAdapter adapter;
     private MovieListViewModel viewModel;
     int pastVisiblesItems, visibleItemCount, totalItemCount;
@@ -41,8 +42,12 @@ public class TopRatedMovieListActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<Movie> movies) {
                 if (movies != null) {
-                    movieList = movies;
-                    adapter.setMovieList(movies);
+                    if (movieList.isEmpty()) {
+                        movieList = movies;
+                    } else {
+                        movieList.addAll(movies);
+                    }
+                    adapter.setMovieList(movieList);
                 }
             }
         });
