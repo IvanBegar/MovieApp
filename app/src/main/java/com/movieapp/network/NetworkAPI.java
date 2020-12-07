@@ -12,7 +12,7 @@ import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RetroInstance {
+public class NetworkAPI {
 
     public static String BASE_URL = "https://api.themoviedb.org/3/";
     private static final String API_KEY = BuildConfig.API_KEY;

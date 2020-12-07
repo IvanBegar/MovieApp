@@ -22,8 +22,8 @@ public class TopRatedMovieListActivity extends AppCompatActivity {
     private List<Movie> movieList = new ArrayList<>();
     private MovieListAdapter adapter;
     private MovieListViewModel viewModel;
-    int pastVisiblesItems, visibleItemCount, totalItemCount;
-    int page = 1;
+    private int pastVisiblesItems, visibleItemCount, totalItemCount;
+    private int page = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +36,17 @@ public class TopRatedMovieListActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         adapter = new MovieListAdapter(this, movieList);
         recyclerView.setAdapter(adapter);
+
         viewModel = ViewModelProviders.of(this).get(MovieListViewModel.class);
+
+        setMovieListObserve();
+
+        setOnItemClickListener(recyclerView);
+
+        setOnScrollListener(recyclerView, layoutManager);
+    }
+
+    private void setMovieListObserve() {
         viewModel.getMovieListObserver().observe(this, movies -> {
             if (movies != null) {
                 if (movieList.isEmpty()) {
@@ -48,7 +58,9 @@ public class TopRatedMovieListActivity extends AppCompatActivity {
             }
         });
         viewModel.makeApiCallForTopRatedMovieList(page);
+    }
 
+    private void setOnItemClickListener(RecyclerView recyclerView) {
         recyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(this, recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
@@ -65,7 +77,9 @@ public class TopRatedMovieListActivity extends AppCompatActivity {
                     }
                 })
         );
+    }
 
+    private void setOnScrollListener(RecyclerView recyclerView, LinearLayoutManager layoutManager) {
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {

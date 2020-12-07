@@ -1,20 +1,21 @@
 package com.movieapp.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import com.movieapp.R;
-import com.movieapp.model.Movie;
-import com.squareup.picasso.Picasso;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.movieapp.R;
+import com.movieapp.model.Movie;
+import com.squareup.picasso.Picasso;
+
 public class MovieDetailsActivity extends AppCompatActivity {
 
     private static String IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
-    ImageView imageView;
-    TextView tvTitle, tvYear, tvOverview, tvYearTitle, tvRate;
+    private ImageView imageView;
+    private TextView tvTitle, tvYear, tvOverview, tvYearTitle, tvRate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,21 +23,31 @@ public class MovieDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_movie_details);
         Intent i = getIntent();
         Movie movie = (Movie) i.getSerializableExtra("movie");
-        imageView = findViewById(R.id.imageView2);
+        setUpViews();
+
         Picasso.get()
                 .load(IMAGE_BASE_URL + movie.getImagePath())
                 .fit()
                 .centerInside()
                 .into(imageView);
-        tvTitle = findViewById(R.id.tvTitle);
+
         tvTitle.setText(movie.getTitle());
-        tvYear = findViewById(R.id.tvYear);
+
         tvYear.setText(movie.getReleaseDate());
-        tvOverview = findViewById(R.id.tvOverview);
+
         tvOverview.setText(movie.getOverview());
-        tvYearTitle = findViewById(R.id.tvYear12);
+
         tvYearTitle.setText(getString(R.string.release_year));
-        tvRate = findViewById(R.id.tvRate);
+
         tvRate.setText(movie.getVoteAverage());
+    }
+
+    private void setUpViews() {
+        imageView = findViewById(R.id.imageView2);
+        tvTitle = findViewById(R.id.tvTitle);
+        tvYear = findViewById(R.id.tvYear);
+        tvOverview = findViewById(R.id.tvOverview);
+        tvYearTitle = findViewById(R.id.tvYear12);
+        tvRate = findViewById(R.id.tvRate);
     }
 }

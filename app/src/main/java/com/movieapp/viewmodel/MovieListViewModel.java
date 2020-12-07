@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel;
 import com.movieapp.model.Movie;
 import com.movieapp.model.TopRatedMoviesResponse;
 import com.movieapp.network.MovieDatabaseAPI;
-import com.movieapp.network.RetroInstance;
+import com.movieapp.network.NetworkAPI;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class MovieListViewModel extends ViewModel {
     }
 
     public void makeApiCallForTopRatedMovieList(int page) {
-        MovieDatabaseAPI movieDatabaseApi = RetroInstance.getRetroClient().create(MovieDatabaseAPI.class);
+        MovieDatabaseAPI movieDatabaseApi = NetworkAPI.getRetroClient().create(MovieDatabaseAPI.class);
         Call<TopRatedMoviesResponse> call = movieDatabaseApi.getTopRatedMovieList(page);
         call.enqueue(new Callback<TopRatedMoviesResponse>() {
             @Override
