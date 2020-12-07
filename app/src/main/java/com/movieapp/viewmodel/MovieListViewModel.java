@@ -1,5 +1,8 @@
 package com.movieapp.viewmodel;
 
+import android.app.Application;
+
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -8,6 +11,7 @@ import com.movieapp.model.Movie;
 import com.movieapp.model.TopRatedMoviesResponse;
 import com.movieapp.network.MovieDatabaseAPI;
 import com.movieapp.network.NetworkAPI;
+import com.movieapp.repository.MovieRepository;
 
 import java.util.List;
 
@@ -15,12 +19,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MovieListViewModel extends ViewModel {
+public class MovieListViewModel extends AndroidViewModel {
+    private MovieRepository movieRepository;
+    private LiveData<List<Movie>> movieList;
 
-    private MutableLiveData<List<Movie>> movieList;
-
-    public MovieListViewModel() {
-        movieList = new MutableLiveData<>();
+    public MovieListViewModel(Application application) {
+        super(application);
+        movieRepository = new MovieRepository(application);
+        movieList = movieRepository.getAllMovies(1);
     }
 
     public LiveData<List<Movie>> getMovieListObserver() {
@@ -28,18 +34,10 @@ public class MovieListViewModel extends ViewModel {
     }
 
     public void makeApiCallForTopRatedMovieList(int page) {
-        MovieDatabaseAPI movieDatabaseApi = NetworkAPI.getRetroClient().create(MovieDatabaseAPI.class);
-        Call<TopRatedMoviesResponse> call = movieDatabaseApi.getTopRatedMovieList(page);
-        call.enqueue(new Callback<TopRatedMoviesResponse>() {
-            @Override
-            public void onResponse(Call<TopRatedMoviesResponse> call, Response<TopRatedMoviesResponse> response) {
-                movieList.setValue(response.body().getResults());
-            }
+        movieList = movieRepository.getAllMovies(page);
+    }
 
-            @Override
-            public void onFailure(Call<TopRatedMoviesResponse> call, Throwable t) {
-                movieList.postValue(null);
-            }
-        });
+    public void deleteAllMovies() {
+        movieRepository.deleteAllMovies();
     }
 }

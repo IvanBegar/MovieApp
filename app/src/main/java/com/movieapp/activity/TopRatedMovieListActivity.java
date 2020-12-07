@@ -47,6 +47,7 @@ public class TopRatedMovieListActivity extends AppCompatActivity {
     }
 
     private void setMovieListObserve() {
+        viewModel.deleteAllMovies();
         viewModel.getMovieListObserver().observe(this, movies -> {
             if (movies != null) {
                 if (movieList.isEmpty()) {
@@ -57,7 +58,6 @@ public class TopRatedMovieListActivity extends AppCompatActivity {
                 adapter.setMovieList(movieList);
             }
         });
-        viewModel.makeApiCallForTopRatedMovieList(page);
     }
 
     private void setOnItemClickListener(RecyclerView recyclerView) {

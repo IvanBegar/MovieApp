@@ -2,15 +2,15 @@ package com.movieapp.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.movieapp.entity.MovieDB;
 
 import java.io.Serializable;
 
 public class Movie implements Serializable {
 
-
     @SerializedName("id")
     @Expose
-    private String id;
+    private int id;
     @SerializedName("title")
     @Expose
     private String title;
@@ -27,8 +27,23 @@ public class Movie implements Serializable {
     @Expose
     private String voteAverage;
 
+    public Movie() {
 
-    public String getId() {
+    }
+
+    public Movie(String title, String imagePath, String releaseDate, String overview, String voteAverage) {
+        this.title = title;
+        this.imagePath = imagePath;
+        this.releaseDate = releaseDate;
+        this.overview = overview;
+        this.voteAverage = voteAverage;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
         return id;
     }
 
@@ -50,5 +65,14 @@ public class Movie implements Serializable {
 
     public String getVoteAverage() {
         return voteAverage;
+    }
+
+    public static Movie mapMovieDBToMovie(MovieDB movieDB) {
+        return new Movie(
+                movieDB.getTitle(),
+                movieDB.getImagePath(),
+                movieDB.getReleaseDate(),
+                movieDB.getOverview(),
+                movieDB.getVoteAverage());
     }
 }
