@@ -30,20 +30,9 @@ public class TopRatedMovieListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(RecyclerView.HORIZONTAL);
-        recyclerView.setLayoutManager(layoutManager);
-        adapter = new MovieListAdapter(this, movieList);
-        recyclerView.setAdapter(adapter);
-
-        viewModel = ViewModelProviders.of(this).get(MovieListViewModel.class);
+        setUpRecyclerView();
 
         setMovieListObserve();
-
-        setOnItemClickListener(recyclerView);
-
-        setOnScrollListener(recyclerView, layoutManager);
     }
 
     private void setMovieListObserve() {
@@ -94,9 +83,23 @@ public class TopRatedMovieListActivity extends AppCompatActivity {
                         page++;
                         viewModel.makeApiCallForTopRatedMovieList(page);
                     }
-
                 }
             }
         });
+    }
+
+    private void setUpRecyclerView() {
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new MovieListAdapter(this, movieList);
+        recyclerView.setAdapter(adapter);
+
+        viewModel = ViewModelProviders.of(this).get(MovieListViewModel.class);
+
+        setOnItemClickListener(recyclerView);
+
+        setOnScrollListener(recyclerView, layoutManager);
     }
 }

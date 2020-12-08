@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.movieapp.R;
 import com.movieapp.model.Movie;
 import com.squareup.picasso.Picasso;
@@ -25,9 +26,8 @@ public class MovieDetailsActivity extends AppCompatActivity {
         Movie movie = (Movie) i.getSerializableExtra("movie");
         setUpViews();
 
-        Picasso.get()
+        Glide.with(this)
                 .load(IMAGE_BASE_URL + movie.getImagePath())
-                .fit()
                 .centerInside()
                 .into(imageView);
 

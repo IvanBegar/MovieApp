@@ -2,7 +2,6 @@ package com.movieapp.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.movieapp.entity.MovieDB;
 
 import java.io.Serializable;
 
@@ -26,10 +25,6 @@ public class Movie implements Serializable {
     @SerializedName("vote_average")
     @Expose
     private String voteAverage;
-
-    public Movie() {
-
-    }
 
     public Movie(String title, String imagePath, String releaseDate, String overview, String voteAverage) {
         this.title = title;
@@ -65,14 +60,5 @@ public class Movie implements Serializable {
 
     public String getVoteAverage() {
         return voteAverage;
-    }
-
-    public static Movie mapMovieDBToMovie(MovieDB movieDB) {
-        return new Movie(
-                movieDB.getTitle(),
-                movieDB.getImagePath(),
-                movieDB.getReleaseDate(),
-                movieDB.getOverview(),
-                movieDB.getVoteAverage());
     }
 }

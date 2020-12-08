@@ -1,7 +1,6 @@
 package com.movieapp.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +9,9 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.movieapp.R;
 import com.movieapp.model.Movie;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -42,14 +41,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.MyVi
     @Override
     public void onBindViewHolder(@NonNull MovieListAdapter.MyViewHolder holder, int position) {
         Movie currentMovie = movieList.get(position);
-        String movieImagePath = IMAGE_BASE_URL + currentMovie.getImagePath();
-        Log.v("imagepath", movieImagePath);
-
-        Picasso.get()
-                .load(movieImagePath)
-                .fit()
-                .centerInside()
-                .into(holder.imageView);
+        holder.bind(currentMovie);
     }
 
     @Override
@@ -66,6 +58,13 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.MyVi
         public MyViewHolder(View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageView);
+        }
+
+        public void bind(Movie movie) {
+            Glide.with(context)
+                    .load(IMAGE_BASE_URL + movie.getImagePath())
+                    .centerInside()
+                    .into(imageView);
         }
     }
 }

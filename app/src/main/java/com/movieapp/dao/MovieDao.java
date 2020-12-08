@@ -7,7 +7,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.movieapp.entity.MovieDB;
+import com.movieapp.entity.MovieEntity;
 
 import java.util.List;
 
@@ -15,16 +15,16 @@ import java.util.List;
 public interface MovieDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(MovieDB movieDB);
+    void insert(MovieEntity movieEntity);
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    void update(MovieDB movieDB);
+    void update(MovieEntity movieEntity);
 
     @Delete
-    void delete(MovieDB movieDB);
+    void delete(MovieEntity movieEntity);
 
-    @Query("SELECT * FROM movie_table ORDER BY vote_average DESC")
-    List<MovieDB> getAllMovies();
+    @Query("SELECT * FROM movie_table")
+    List<MovieEntity> getAllMovies();
 
     @Query("DELETE FROM movie_table")
     void deleteAllMovies();

@@ -4,10 +4,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.movieapp.model.Movie;
-
 @Entity(tableName = "movie_table")
-public class MovieDB {
+public class MovieEntity {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
@@ -21,7 +19,7 @@ public class MovieDB {
     @ColumnInfo(name = "vote_average")
     private String voteAverage;
 
-    public MovieDB(String title, String imagePath, String releaseDate, String overview, String voteAverage) {
+    public MovieEntity(String title, String imagePath, String releaseDate, String overview, String voteAverage) {
         this.title = title;
         this.imagePath = imagePath;
         this.releaseDate = releaseDate;
@@ -55,16 +53,5 @@ public class MovieDB {
 
     public String getVoteAverage() {
         return voteAverage;
-    }
-
-    public static MovieDB mapMovieToMovieDB(Movie movie) {
-        MovieDB movieDB = new MovieDB(
-                movie.getTitle(),
-                movie.getImagePath(),
-                movie.getReleaseDate(),
-                movie.getOverview(),
-                movie.getVoteAverage());
-        movieDB.setId(movie.getId());
-        return movieDB;
     }
 }
