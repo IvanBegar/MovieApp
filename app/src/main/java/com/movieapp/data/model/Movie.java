@@ -1,25 +1,32 @@
-package com.movieapp.entity;
+package com.movieapp.data.model;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-@Entity(tableName = "movie_table")
-public class MovieEntity {
-    @PrimaryKey(autoGenerate = true)
+import java.io.Serializable;
+
+public class Movie implements Serializable {
+
+    @SerializedName("id")
+    @Expose
     private int id;
-
+    @SerializedName("title")
+    @Expose
     private String title;
-    @ColumnInfo(name = "poster_path")
+    @SerializedName("poster_path")
+    @Expose
     private String imagePath;
-    @ColumnInfo(name = "release_date")
+    @SerializedName("release_date")
+    @Expose
     private String releaseDate;
-
+    @SerializedName("overview")
+    @Expose
     private String overview;
-    @ColumnInfo(name = "vote_average")
+    @SerializedName("vote_average")
+    @Expose
     private String voteAverage;
 
-    public MovieEntity(String title, String imagePath, String releaseDate, String overview, String voteAverage) {
+    public Movie(String title, String imagePath, String releaseDate, String overview, String voteAverage) {
         this.title = title;
         this.imagePath = imagePath;
         this.releaseDate = releaseDate;

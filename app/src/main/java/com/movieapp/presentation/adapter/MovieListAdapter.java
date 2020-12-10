@@ -1,4 +1,4 @@
-package com.movieapp.adapter;
+package com.movieapp.presentation.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.movieapp.R;
-import com.movieapp.model.Movie;
+import com.movieapp.data.model.Movie;
 
 import java.util.List;
 

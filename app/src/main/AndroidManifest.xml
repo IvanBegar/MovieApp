@@ -12,8 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieApp"
         android:name=".MovieApplication">
-        <activity android:name=".activity.MovieDetailsActivity"></activity>
-        <activity android:name=".activity.TopRatedMovieListActivity">
+        <activity android:name=".presentation.activity.TopRatedMovieListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

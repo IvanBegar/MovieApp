@@ -1,7 +1,7 @@
 package com.movieapp.util;
 
-import com.movieapp.entity.MovieEntity;
-import com.movieapp.model.Movie;
+import com.movieapp.data.entity.MovieEntity;
+import com.movieapp.data.model.Movie;
 
 public class EntityUtils {
 

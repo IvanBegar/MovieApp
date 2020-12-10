@@ -1,6 +1,6 @@
-package com.movieapp.network;
+package com.movieapp.data.network;
 
-import com.movieapp.model.TopRatedMoviesResponse;
+import com.movieapp.data.model.TopRatedMoviesResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

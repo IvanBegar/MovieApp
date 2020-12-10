@@ -1,4 +1,4 @@
-package com.movieapp.dao;
+package com.movieapp.data.dao;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -7,7 +7,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.movieapp.entity.MovieEntity;
+import com.movieapp.data.entity.MovieEntity;
 
 import java.util.List;
 

@@ -1,15 +1,16 @@
-package com.movieapp.repository;
+package com.movieapp.data.repository.impl;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.movieapp.MovieApplication;
-import com.movieapp.dao.MovieDao;
-import com.movieapp.entity.MovieEntity;
-import com.movieapp.model.Movie;
-import com.movieapp.model.TopRatedMoviesResponse;
-import com.movieapp.network.MovieDatabaseAPI;
-import com.movieapp.network.NetworkAPI;
+import com.movieapp.data.dao.MovieDao;
+import com.movieapp.data.entity.MovieEntity;
+import com.movieapp.data.model.Movie;
+import com.movieapp.data.model.TopRatedMoviesResponse;
+import com.movieapp.data.network.MovieDatabaseAPI;
+import com.movieapp.data.network.NetworkAPI;
+import com.movieapp.data.repository.MovieRepository;
 import com.movieapp.util.EntityUtils;
 import com.movieapp.util.MovieDatabase;
 
@@ -22,7 +23,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MovieRepository {
+public class MovieRepositoryImpl implements MovieRepository {
     private MovieDao movieDao;
     private MovieDatabaseAPI movieDatabaseAPI;
     private MutableLiveData<List<Movie>> movieList;
@@ -30,7 +31,7 @@ public class MovieRepository {
     private MovieDatabase database;
     private ExecutorService executorService;
 
-    public MovieRepository() {
+    public MovieRepositoryImpl() {
         database = MovieApplication.getDatabase();
         movieDao = database.movieDao();
         movieList = new MutableLiveData<>();

@@ -6,8 +6,8 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.movieapp.dao.MovieDao;
-import com.movieapp.entity.MovieEntity;
+import com.movieapp.data.dao.MovieDao;
+import com.movieapp.data.entity.MovieEntity;
 
 @Database(entities = MovieEntity.class, version = 1)
 public abstract class MovieDatabase extends RoomDatabase {
